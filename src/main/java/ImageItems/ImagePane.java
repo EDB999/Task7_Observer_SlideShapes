@@ -15,7 +15,12 @@ public class ImagePane implements Observer {
     private final JokeBuilder jokeBuilder;
     private Joke joke;
     private final FadeTransition fade = new FadeTransition();
-
+    {
+    fade.setDuration(new Duration(1200));
+            fade.setFromValue(0.0);
+            fade.setToValue(1.0);
+    } // это инициализация
+    
     public ImagePane() {
         jokeBuilder = new JokeBuilder();
         jokeDirector = new Director();
@@ -31,11 +36,9 @@ public class ImagePane implements Observer {
 
 
     @Override
-    public void update(Date date) {
+    public void update(Date date) {//  время считать самостоятельно в компоненте
         if (date.getSeconds() % 5 == 0){
-            fade.setDuration(new Duration(1200));
-            fade.setFromValue(0.0);
-            fade.setToValue(1.0);
+           
             fade.play();
             this.joke = new Director().Construct(jokeBuilder);
         }
