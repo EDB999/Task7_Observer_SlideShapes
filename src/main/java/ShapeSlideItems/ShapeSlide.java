@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import ObserverItems.Interfaces.Observer;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 public class ShapeSlide extends StackPane implements Observer {
@@ -19,14 +20,17 @@ public class ShapeSlide extends StackPane implements Observer {
     private final double widthRect = 100;
 
     Canvas canvas = new Canvas(width, height);
+
+    private LocalTime time;
     GraphicsContext gc = canvas.getGraphicsContext2D();
     @Override
-    public void update(Date date) {
-        if (date.getSeconds() % 2 == 0){
+    public void update() {
+        time = LocalTime.now();
+        if (time.getSecond() % 2 == 0){
             this.drawRectangle(gc);
             System.out.println("Start rect");
         }
-        else if (date.getSeconds() % 3 == 0)
+        else if (time.getSecond() % 3 == 0)
         {
             this.drawCircle(gc);
             System.out.println("Start circle");
