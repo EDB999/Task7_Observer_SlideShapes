@@ -18,11 +18,13 @@ public class ImagePane implements Observer {
     private Joke joke;
 
     private Date date;
-    private LocalTime time;
     private final FadeTransition fade = new FadeTransition();
+
+    private LocalTime time;
 
     public ImagePane() {
         jokeBuilder = new JokeBuilder();
+        time = LocalTime.of(0,0,0);
         jokeDirector = new Director();
         joke = jokeDirector.Construct(jokeBuilder);
 
@@ -37,7 +39,7 @@ public class ImagePane implements Observer {
 
     @Override
     public void update() {
-        time = LocalTime.now();
+        time = time.plusSeconds(1);
         if (time.getSecond() % 5 == 0){
             fade.setDuration(new Duration(1200));
             fade.setFromValue(0.0);
